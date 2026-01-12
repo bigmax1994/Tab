@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>DCM Tab</title>
+        <link rel="stylesheet" href="/tab/home/home.css">
+        <link rel="stylesheet" href="/public/inc/style.css">
+        <link rel="stylesheet" href="/public/joinedDebate/create.css">
+        <style>
+            .static-member {
+                cursor: unset!important;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="header">
+            <img class="logo" src="/public/resources/logo.png" alt="Logo">
+            <div class="title">
+                <h1>DCM Tab</h1>
+            </div>
+            <div class="nav">
+                <a class="nav-item admin-nav" style="display: none;" href="/admin/create/create.html">Start a Debate</a>
+            </div>
+        </div>
+        <div class="bg">
+            <div class="content">
+                <div class="card" style="height: 100%;">
+                    <h3>Enjoy the Debate!</h3>
+                    <div id="content-wrapper">
+                        <div id="debate-assign-wrapper" style="width: 100%;" data-show="true"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="/session"></script>
+        <script src="/tab/home/header.js"></script>
+        <script src="/current"></script>
+        <script src="/public/joinedDebate/joined.js"></script>
+    </body>
+</html>

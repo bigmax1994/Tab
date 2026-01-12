@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>DCM Tab</title>
+        <link rel="stylesheet" href="/tab/home/home.css">
+        <link rel="stylesheet" href="/public/inc/style.css">
+    </head>
+    <body>
+        <div class="header">
+            <img class="logo" src="/public/resources/logo.png" alt="Logo">
+            <div class="title">
+                <h1>DCM Tab</h1>
+            </div>
+            <div class="nav">
+                <a class="nav-item admin-nav" style="display: none;" href="/admin/create/create.html">Start a Debate</a>
+            </div>
+        </div>
+        <div class="bg">
+            <div class="content">
+                <div class="card">
+                    <h3>Next Debate</h3>
+                    <h2>Wednesday 19:00 at KHG</h2>
+                    <h3>Scan the QR Code to join the debate</h3>
+                    <div id="qr-reader" style="width:500px"></div>
+                    <div id="qr-reader-results"></div>  
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="/session"></script>
+        <script src="/tab/home/header.js"></script>
+        <script src="https://unpkg.com/html5-qrcode"></script>
+        <script src="/tab/home/home.js"></script>
+    </body>
+</html>

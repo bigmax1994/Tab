@@ -1,0 +1,527 @@
+#drag-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    display: none;
+
+    cursor: grabbing;
+}
+
+#button-wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-top: 20px;
+}
+  
+#content-wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+#participants-wrapper {
+    position: relative;
+    flex: 1;
+    height: 100%;
+    overflow-y: auto;
+    box-sizing: border-box;
+}
+#detail-wrapper, #small-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    width: calc(100% - 10px);
+}
+
+#debate-assign-wrapper {
+    height: 100%;
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    overflow-y: auto;
+    position: relative;
+}
+
+#debate-assign {
+    display: block;
+    gap: 10px;
+    overflow-y: auto;
+    position: absolute;
+    width: 100%;
+}
+
+#debate-assign-wrapper[data-show="false"] {
+    display: none;
+}
+#debate-assign-wrapper[data-show="true"] {
+    display: flex;
+}
+
+#table-wrapper-detail {
+    height: 100%;
+}
+#table-wrapper-small {
+    height: 100%;
+}
+
+#detail-wrapper[data-show="true"], #small-wrapper[data-show="true"] {
+    animation: showDiv 400ms ease-in-out forwards;
+}
+div[data-show="false"] {
+    display: none !important;
+}
+
+@keyframes showDiv {
+    0% {
+        display: flex;
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.participants-table {
+    width: 100%;
+    table-layout: fixed;
+    color: var(--text);
+    border-collapse: collapse;
+    box-shadow: 0px 10px 18px -6px var(--shadow);
+}
+
+.participants-table > thead {
+    width: 100%;
+}
+.participants-table > thead > tr > th {
+    padding: 10px;
+    text-align: center;
+    font-size: 16px;
+    text-transform: uppercase;
+    background: var(--primary);
+}
+
+.participants-table > thead > tr > th:nth-child(1) {
+    border-radius: 10px 0 0 0;
+}
+
+.participants-table > thead > tr > th:last-child {
+    border-radius: 0 10px 0 0;
+}
+
+.participants-table > tbody {
+    overflow-x:auto;
+    margin-top: 0px;
+    border: 1px solid var(--primary);
+}
+
+.participants-table > tbody > tr {
+    border-bottom: 1px solid var(--primary);
+}
+.participants-table > tbody > tr > td {
+    padding: 10px;
+    text-align: center;
+    font-size: 16px;
+    background: var(--foreground);
+}
+.participants-table > thead > tr > th:nth-child(2) {
+    width: 100px;
+}
+.participants-table > thead > tr > th:nth-child(3) {
+    width: 100px;
+}
+.participants-table > thead > tr > th:nth-child(4) {
+    width: 125px;
+}
+.participants-table > thead > tr > th:nth-child(6) {
+    width: 125px;
+}
+
+.button {
+    margin-top: 1em;
+    margin-bottom: 1em;
+    padding: 1em;
+    border-radius: 5px;
+    border: #656565;
+    box-shadow: 0px 10px 18px -6px var(--shadow);
+    background-image: radial-gradient(circle, var(--accent) 0%, var(--primary) 30%, var(--primary) 100%);
+    background-size: 200%;
+    color: var(--text);
+    text-decoration: none;
+    text-align: center;
+
+    font-size: 20px;
+    cursor: pointer;
+    transition: background-position 400ms ease-in-out;
+    background-position: 0%;
+}
+
+.button:hover {
+    background-position: 100%;  
+}
+
+.button:active {
+    animation: click 400ms ease;
+}
+  
+@keyframes click {
+    0% {
+        scale: 1;
+    }
+    80% {
+        scale: 0.9;
+    }
+    100% {
+        scale: 0.95;
+    }
+}
+
+#participants-table-small {
+    width: 100%;
+}
+
+#participants-table-small > thead > tr > th:nth-child(2) {
+    width: 10px;
+}
+#participants-table-small > thead > tr > th:nth-child(3) {
+    width: 10px;
+}
+#participants-table-small > thead > tr > th:nth-child(4) {
+    width: 10px;
+}
+#participants-table-small > thead > tr > th:nth-child(5) {
+    width: 10px;
+}
+#participants-table-small > thead > tr > th:nth-child(6) {
+    width: 10px;
+}
+#participants-table-small > thead > tr > th:nth-child(7) {
+    width: 10px;
+}
+#participants-table-small > tbody > tr {
+    td:nth-child(2), td:nth-child(3), td:nth-child(4), td:nth-child(5), td:nth-child(6), td:nth-child(7) {
+        border-left: var(--text) 1px solid;
+    }
+}
+
+#participants-table-small > tbody > tr {
+    cursor: pointer;
+}
+
+tr.assigned {
+    opacity: 0.5;
+    text-decoration: line-through;
+    cursor: not-allowed !important;
+}
+
+th {
+    height: 3.2em;
+    line-height: 1.6em;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+}
+td {
+    height: 1.6em;
+    line-height: 1.6em;
+    text-overflow: ellipsis;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+}
+
+td.en {
+    background-color: green !important;
+}
+td.en-de {
+    background-color: orange !important;
+}
+td.de {
+    background-color: red !important;
+}
+td.bp {
+    background-color: green !important;
+}
+td.opd {
+    background-color: red !important;
+}
+td.bp-opd {
+    background-color: orange !important;
+}
+td.s {
+    background-color: green !important;
+}
+td.s-j {
+    background-color: orange !important;
+}
+td.j {
+    background-color: red !important;
+}
+td.exp-leq-5 {
+    background-color: red !important;
+}
+td.exp-5-10 {
+    background-color: yellow !important;
+}
+td.exp-geq-10 {
+    background-color: green !important;
+}
+td.no-tournament {
+    background-color: red !important;
+}
+td.some-tournament {
+    background-color: green !important;
+}
+td.notTalk {
+    background-color: red !important;
+}
+td.couldTalk {
+    background-color: green !important;
+}
+
+#verticalExtender {
+    min-height: 90%;
+    min-width: 16px;
+    border-radius: 8px;
+    margin: 0 10px;
+    background-color: var(--primary);
+    flex: 0;
+    position: relative;
+}
+#verticalExtender:hover, #verticalExtender:hover::before {
+    background-color: var(--accent) !important;
+}
+#verticalExtender:active {
+    animation: click 200ms ease;
+}
+
+#verticalExtender::before {
+    font-weight: 1000;
+    color: var(--text);
+    font-size: 16px;
+    text-align: center;
+    line-height: 32px;
+    position: absolute;
+    top: calc(50% - 16px);
+    left: -8px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: var(--primary);
+}
+#verticalExtender.left::before {
+    content: '<';
+}
+#verticalExtender.right::before {
+    content: '>';
+}
+
+.debate-assign {
+    flex: 1;
+    display: block;
+}
+
+.debate-card {
+    max-width: 100%;
+    background-color: var(--foreground);
+    border-radius: 10px;
+    box-shadow: 0px 10px 18px -6px var(--shadow);
+    border: 2px solid var(--primary);
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    box-sizing: border-box;
+    margin-bottom: 50px;
+}
+
+.input-group {
+    width: 100%;
+    justify-content: space-between;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.input {
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    border: 1px solid var(--primary);
+    text-indent: 10px;
+    box-shadow: 0px 10px 18px -6px var(--shadow);
+    font-size: 15px;
+    padding-top: 2em;
+    padding-bottom: 1em;
+    padding-right: 1em;
+
+    box-sizing: border-box;
+    text-overflow: ellipsis;
+
+    transition: all 0.2s ease;
+}
+
+.input:focus {
+    outline: none;
+    border: 1px solid var(--accent);
+}
+
+label, span {
+    color: var(--placeholderText);
+    font-size: 15px;
+
+    position: absolute;
+    top: 2.2em;
+    left: 1em;
+
+    transition: all 0.2s ease;
+    pointer-events: none;
+}
+span {
+    min-height: 1.6em;
+}
+
+label[data-focus="true"], .input:focus + label {
+    top: 1.1em;
+    font-size: 13px;
+}
+
+.teams {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 100%;
+    height: 100%;
+    background-color: var(--primary);
+    border-radius: 10px;
+    box-shadow: 0px 10px 18px -6px var(--shadow);
+    margin-top: 10px;
+}
+.debate-half {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    flex: 1;
+    max-height: 45%;
+}
+.team {
+    display: flex;
+    flex: 1;
+    max-width: 50%;
+    margin: 2px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid var(--primary);
+    background-color: var(--foreground);
+    color: var(--text);
+    box-sizing: border-box;
+}
+.big-team {
+    min-width: 100%;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.team > p {
+    margin: 0;
+    font-size: 16px;
+    font-weight: bold;
+}
+.member {
+    height: 25px;
+    line-height: 25px;
+    text-align: center;
+    display: block;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    background-color: var(--primary);
+    box-shadow: 0px 10px 18px -6px var(--shadow);
+    margin-top: 5px;
+
+    color: var(--text);
+    font-size: 12px;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    box-sizing: border-box;
+    border: 2px solid var(--primary);
+    max-lines: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.static-member {
+    cursor: default;
+    min-width: 100%;
+    max-width: 100%;
+    width: 100%;
+}
+.assigned-static {
+    cursor: pointer;
+    border-color: var(--selected)!important;
+}
+.dragged {
+    position: absolute;
+    width: 150px;
+    height: 25px;
+}
+
+.judge {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    background-color: var(--primary);
+    box-shadow: 0px 10px 18px -6px var(--shadow);
+    margin-top: 5px;
+
+    color: var(--text);
+    font-size: 12px;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    box-sizing: border-box;
+    border: 2px solid var(--primary);
+}
+
+.chair {
+    border: var(--accent) 2px solid;
+    font-size: 15px;
+}
+
+.delete-debate {
+    min-height: 30px;
+    margin: 10px;
+    aspect-ratio: 1;
+    background-image: url('/public/resources/trash.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    cursor: pointer;
+}
+
+.delete-debate:active {
+    animation: click 400ms ease;
+}

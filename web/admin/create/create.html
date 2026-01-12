@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>DCM Tab</title>
+        <link rel="stylesheet" href="/public/joinedDebate/create.css">
+        <link rel="stylesheet" href="/public/inc/style.css">
+        <link rel="stylesheet" href="/tab/home/home.css">
+    </head>
+    <body>
+        <div class="header">
+            <img class="logo" src="/public/resources/logo.png" alt="Logo">
+            <div class="title">
+                <h1>DCM Tab</h1>
+            </div>
+            <div class="nav">
+                <a class="nav-item" href="/tab/home/home.html">Next Debate</a>
+            </div>
+        </div>
+        <div class="bg">
+            <div class="content">
+                <div class="card" style="height: 100%;">
+                    <div id="button-wrapper">
+                        <a href="/admin/debate.pdf" target="_blank" rel="noopener noreferrer" id="pdfLink" class="button">Download Debate PDF</a>
+                        <button id="createBPRoomButton" class="button" onclick="addBPRoom()">Create BP Room</button>
+                        <button id="createOPDRoomButton" class="button" onclick="addOPDRoom()">Create OPD Room</button>
+                        <button id="startDebate" class="button" onclick="startDebate()">Save</button>
+                        <button id="resetDebate" class="button" onclick="resetDebate()">Reset</button>
+                        <button id="deleteDebate" class="button" onclick="deleteDebate()">Delete All Users and recreate PDF</button>
+                    </div>
+                    <div id="content-wrapper">
+                        <div id="participants-wrapper">
+                            <div id="detail-wrapper" data-show="true">
+                                <div id="table-wrapper-detail">
+                                    <table class="participants-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Language</th>
+                                                <th>Format</th>
+                                                <th>Role</th>
+                                                <th>Experience</th>
+                                                <th>Comments</th>
+                                                <th>Couldn't Last Time</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="participants-table-body">
+                                            <!-- Participants will be dynamically added here -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div id="small-wrapper" data-show="false">
+                                <div id="table-wrapper-small">
+                                    <table id="participants-table-small" class ="participants-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody id="participants-table-body-small">
+                                            <!-- Participants will be dynamically added here -->
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="verticalExtender" class="left" onclick="changeView()"></div>
+                        <div id="debate-assign-wrapper" data-show="false">
+                            <div id="debate-assign">
+                                <!-- Debate assignments will be dynamically added here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        </div>
+        <div id="drag-overlay"></div>
+        <script src="/session"></script>
+        <script src="/tab/home/header.js"></script>
+        <script src="/admin/participants"></script>
+        <script src="/current"></script>
+        <script src="/admin/create/create.js"></script>
+    </body>
+</html>

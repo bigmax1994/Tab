@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>DCM Tab</title>
+        <link rel="stylesheet" href="/tab/home/home.css">
+        <link rel="stylesheet" href="/tab/join.css">
+        <link rel="stylesheet" href="/public/inc/style.css">
+    </head>
+    <body>
+        <div class="header">
+            <img class="logo" src="/public/resources/logo.png" alt="Logo">
+            <div class="title">
+                <h1>DCM Tab</h1>
+            </div>
+            <div class="nav">
+                <a class="nav-item admin-nav" style="display: none;" href="/admin/create/create.html">Start a Debate</a>
+            </div>
+        </div>
+        <div class="bg">
+            <div class="content">
+                <div class="card">
+                    <form id="join-form" method="post" action="/join/handler/">
+                        <div class="all-input-group">
+                            <div class="input-group">
+                                <input class="input" type="text" id="name" name="name" required autocapitalize="on" autocomplete="off" autocorrect="off" spellcheck="false">
+                                <label for="name" data-focus="false" class="text-label">Name</label>
+                            </div>
+                            <div class="input-group">
+                                <input class="check-input" type="checkbox" id="en" name="en" checked>
+                                <label for="en" class="check-label">English</label>
+                                <input class="check-input" type="checkbox" id="de" name="de">
+                                <label for="de" class="check-label">Deutsch</label>
+                            </div>
+                            <div class="input-group">
+                                <input class="check-input" type="checkbox" id="bp" name="bp" checked>
+                                <label for="bp" class="check-label">BP</label>
+                                <input class="check-input" type="checkbox" id="opd" name="opd">
+                                <label for="opd" class="check-label">OPD</label>
+                            </div>
+                            <div class="input-group">
+                                <input class="check-input" type="checkbox" id="speak" name="speak" checked>
+                                <label for="speak" class="check-label">Speak</label>
+                                <input class="check-input" type="checkbox" id="judge" name="judge">
+                                <label for="judge" class="check-label">Judge</label>
+                            </div>
+                            <p>How many Debates have you taken part in?</p>
+                            <div class="input-group">
+                                <input class="check-input" type="radio" id="beginner" name="exp" value="0" checked>
+                                <label for="beginner" class="check-label">&lt 5</label>
+                                <input class="check-input" type="radio" id="intermediate" name="exp" value="1" >
+                                <label for="intermediate" class="check-label">5-10</label>
+                                <input class="check-input" type="radio" id="expert" name="exp" value="2" >
+                                <label for="expert" class="check-label">&gt 10</label>
+                            </div>
+                            <div class="input-group">
+                                <input class="input" type="text" id="next-tournament" name="next-tournament">
+                                <label for="next-tournament" data-focus="false" class="text-label">Teammate or Tournament</label>
+                            </div>
+                            <div class="input-group">
+                                <input class="check-input" type="radio" id="could-speak" name="last-time" checked value="0">
+                                <label for="could-speak" class="check-label">Could Speak last time</label>
+                                <input class="check-input" type="radio" id="not-speak" name="last-time" value="1" >
+                                <label for="not-speak" class="check-label">Couldn't Speak last time</label>
+                            </div>
+                            <input type="hidden" name="code" id="code" value="">
+                            <div class="submit-group">
+                                <input class="button submit-button" type="button" id="submit-button" value="Join">
+                            </div>
+                        </div>
+                    </form>
+                </div>  
+            </div>
+        </div>
+        <script src="/session"></script>
+        <script src="/tab/home/header.js"></script>
+        <script src="/tab/join.js"></script>
+    </body>
+</html>

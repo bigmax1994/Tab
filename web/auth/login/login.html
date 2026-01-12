@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>DCM Tab</title>
+        <link rel="stylesheet" href="/login/login.css">
+        <link rel="stylesheet" href="/public/inc/style.css">
+    </head>
+    <body>
+        <div class="header">
+            <img class="logo" src="/public/resources/logo.png" alt="Logo">
+            <div class="title">
+                <h1>DCM Tab</h1>
+            </div>
+        </div>
+        <div class="bg">
+            <div class="content">
+                <div class="login-card">
+                    <form action="/login/handler/" method="post">
+                        <div class="all-input-group">
+                            <div class="input-group">
+                                <input class="input" type="text" id="username" name="username" required autocapitalize="off" autocomplete="off" autocorrect="off" spellcheck="false">
+                                <label for="username" data-focus="false">Username</label>
+                            </div>
+                            <div class="input-group">
+                                <input class="input" type="password" id="password" name="password" required autocapitalize="off" autocomplete="off" autocorrect="off" spellcheck="false">
+                                <label for="password" data-focus="false">Password</label>
+                            </div>
+                        </div>
+                        <div class="submit-group">
+                            <div id="loginFailed" class="error-message" style="display: none;">
+                                <p>Incorrect Username or Password</p>
+                            </div>
+                            <input class="button" type="submit" id="submit-button" value="Login">
+                        </div>
+                    </form>
+            </div>
+        </div>
+        <script src="/session"></script>
+        <script src="/login/login.js"></script>
+</html>
