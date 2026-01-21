@@ -154,7 +154,7 @@ StartLimitIntervalSec=0
 Type=simple
 Restart=always
 RestartSec=1
-ExecStart=/usr/bin/java -jar $INSTALL_DIR/tab.jar $PORT $APP_USER $APP_PASS $INSTALL_DIR/web https://$DOMAIN
+ExecStart=/usr/bin/java -jar $INSTALL_DIR/tab.jar $PORT $APP_USER $APP_PASS $INSTALL_DIR/web/ https://$DOMAIN
 
 [Install]
 WantedBy=multi-user.target
