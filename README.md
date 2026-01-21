@@ -24,7 +24,7 @@ In short:
 If you are running a Linux server with systemd (for example Ubuntu or Debian), installation is a **single command**.
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/bigmax1994/Tab/main/install.sh | sudo bash
+curl -fsSL https://github.com/bigmax1994/Tab/releases/latest/download/install.sh | sudo bash
 ```
 
 The installer will:
