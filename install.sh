@@ -83,6 +83,12 @@ if [[ -z "$DOMAIN" ]]; then
     exit 1
 fi
 
+read -rp "Admin email (for TLS certificate): " ADMIN_EMAIL < /dev/tty
+if [[ -z "$ADMIN_EMAIL" ]]; then
+    echo "❌ Admin email is required"
+    exit 1
+fi
+
 read -rp "App username: " APP_USER < /dev/tty
 read -rsp "App password: " APP_PASS < /dev/tty
 echo ""
@@ -182,7 +188,9 @@ certbot certonly \
   --nginx \
   -d "$DOMAIN" \
   --cert-name "$DOMAIN" \
-  --agree-tos
+  --non-interactive \
+  --agree-tos \
+  -m "$ADMIN_EMAIL"
 
 if [[ ! -f "/etc/letsencrypt/live/$DOMAIN/fullchain.pem" ]]; then
     echo "❌ Certificate generation failed"
