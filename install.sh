@@ -23,7 +23,7 @@ INSTALLED=false
 if systemctl list-unit-files | grep -q "${SERVICE_NAME}.service"; then
     INSTALLED=true
     echo "⚠️ Existing installation detected."
-    read -rp "Update existing installation? [Y/n]: " UPDATE
+    read -rp "Update existing installation? [Y/n]: " UPDATE < /dev/tty
     UPDATE=${UPDATE:-Y}
     if [[ "$UPDATE" =~ ^[Nn]$ ]]; then
         exit 0
@@ -71,20 +71,20 @@ if systemctl list-unit-files | grep -q "${SERVICE_NAME}.service"; then
 fi
 
 ### Ask questions
-read -rp "Install directory [$DEFAULT_INSTALL_DIR]: " INSTALL_DIR
+read -rp "Install directory [$DEFAULT_INSTALL_DIR]: " INSTALL_DIR < /dev/tty
 INSTALL_DIR=${INSTALL_DIR:-$DEFAULT_INSTALL_DIR}
 
-read -rp "Port [$DEFAULT_PORT]: " PORT
+read -rp "Port [$DEFAULT_PORT]: " PORT < /dev/tty
 PORT=${PORT:-$DEFAULT_PORT}
 
-read -rp "DNS domain (e.g. tab.example.com): " DOMAIN
+read -rp "DNS domain (e.g. tab.example.com): " DOMAIN < /dev/tty
 if [[ -z "$DOMAIN" ]]; then
     echo "❌ Domain is required"
     exit 1
 fi
 
-read -rp "App username: " APP_USER
-read -rsp "App password: " APP_PASS
+read -rp "App username: " APP_USER < /dev/tty
+read -rsp "App password: " APP_PASS < /dev/tty
 echo ""
 
 ### Dependencies
