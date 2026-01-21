@@ -28,6 +28,8 @@ if systemctl list-unit-files | grep -q "${SERVICE_NAME}.service"; then
     if [[ "$UPDATE" =~ ^[Nn]$ ]]; then
         exit 0
     fi
+
+    echo "⏳ Updating existing installation"
     systemctl stop "${SERVICE_NAME}.service" || true
     # --- Detect existing install directory from systemd ---
     SERVICE_FILE="/etc/systemd/system/${SERVICE_NAME}.service"
@@ -65,6 +67,9 @@ if systemctl list-unit-files | grep -q "${SERVICE_NAME}.service"; then
 
     # --- Cleanup ---
     rm -rf "$TMP_DIR"
+
+    echo "▶️ Starting services"
+    systemctl start "${SERVICE_NAME}.service"
 
     echo "✅ Update completed"
     exit 0
