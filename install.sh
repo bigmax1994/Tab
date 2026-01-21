@@ -152,8 +152,45 @@ systemctl daemon-reexec
 systemctl daemon-reload
 systemctl enable ${SERVICE_NAME}.service
 
-### Nginx HTTPS config
-echo "🌐 Configuring nginx"
+echo "🌐 Configuring nginx (HTTP only for certbot)"
+
+# --- Phase 1: HTTP config (required for certbot) ---
+cat > /etc/nginx/sites-available/$DOMAIN.conf <<EOF
+server {
+    listen 80;
+    server_name $DOMAIN;
+
+    location / {
+        proxy_pass http://127.0.0.1:$PORT;
+        proxy_set_header Host \$host;
+        proxy_set_header X-Real-IP \$remote_addr;
+        proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto http;
+    }
+}
+EOF
+
+ln -sf /etc/nginx/sites-available/$DOMAIN.conf /etc/nginx/sites-enabled/$DOMAIN.conf
+rm -f /etc/nginx/sites-enabled/default
+
+nginx -t
+systemctl reload nginx
+
+# --- Phase 2: Obtain TLS certificate ---
+echo "🔐 Obtaining TLS certificate"
+certbot certonly \
+  --nginx \
+  -d "$DOMAIN" \
+  --cert-name "$DOMAIN" \
+  --agree-tos
+
+if [[ ! -f "/etc/letsencrypt/live/$DOMAIN/fullchain.pem" ]]; then
+    echo "❌ Certificate generation failed"
+    exit 1
+fi
+
+# --- Phase 3: SSL nginx config ---
+echo "🔒 Enabling HTTPS"
 
 cat > /etc/nginx/sites-available/$DOMAIN.conf <<EOF
 server {
@@ -163,8 +200,11 @@ server {
 }
 
 server {
-    listen 443 ssl;
+    listen 443 ssl http2;
     server_name $DOMAIN;
+
+    ssl_certificate /etc/letsencrypt/live/$DOMAIN/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/$DOMAIN/privkey.pem;
 
     location / {
         proxy_pass http://127.0.0.1:$PORT;
@@ -176,22 +216,15 @@ server {
 }
 EOF
 
-ln -sf /etc/nginx/sites-available/$DOMAIN.conf /etc/nginx/sites-enabled/$DOMAIN.conf
-rm -f /etc/nginx/sites-enabled/default
-
 nginx -t
 systemctl reload nginx
 
-### Certbot
-echo "🔐 Obtaining TLS certificate"
-certbot --nginx -d "$DOMAIN"
-
+# --- Enable certbot renewals ---
 systemctl enable certbot.timer
 systemctl start certbot.timer
 
-### Start services
+# --- Start application services ---
 echo "▶️ Starting services"
-systemctl restart nginx
 systemctl restart ${SERVICE_NAME}.service
 
 echo ""
