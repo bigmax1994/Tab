@@ -61,7 +61,7 @@ if systemctl list-unit-files | grep -q "${SERVICE_NAME}.service"; then
 
     rm -rf "$INSTALL_DIR/web"
     mkdir -p "$INSTALL_DIR/web"
-    unzip -q "$TMP_DIR/web.zip" -d "$INSTALL_DIR/web"
+    unzip -oq "$TMP_DIR/web.zip" -d "$INSTALL_DIR/web"
 
     # --- Cleanup ---
     rm -rf "$TMP_DIR"
@@ -112,8 +112,9 @@ curl -L "https://github.com/$GITHUB_REPO/releases/latest/download/$WEB_NAME" -o 
 ### Install files
 echo "📂 Installing files"
 cp "$TMP_DIR/$JAR_NAME" "$INSTALL_DIR/tab.jar"
-rm -rf "$INSTALL_DIR/web/*"
-unzip -q "$TMP_DIR/$WEB_NAME" -d "$INSTALL_DIR/web"
+rm -rf "$INSTALL_DIR/web"
+mkdir -p "$INSTALL_DIR/web"
+unzip -oq "$TMP_DIR/$WEB_NAME" -d "$INSTALL_DIR/web"
 
 ### Firewall (UFW)
 echo "🔥 Configuring firewall (ufw)"
