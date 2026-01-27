@@ -1,46 +1,80 @@
 var tableBody = document.getElementById("participants-table-body");
 if (tableBody) {
-    //fill the table with the participants
-    for (var i = 0; i < participants.length; i++) {
-        var participant = participants[i];
+    // fill the table with the participants
+    participants.forEach(function(participant) {
         var row = document.createElement("tr");
-        row.innerHTML = `
-            <td>${participant.name}</td>
-            <td>${participant.language}</td>
-            <td>${participant.format}</td>
-            <td>${participant.role}</td>
-            <td>${participant.experience}</td>
-            <td>${participant.nextTournament}</td>
-            <td>${participant.couldnt}</td>
-        `;
+
+        var tdName = document.createElement("td");
+        tdName.textContent = participant.name;
+        row.appendChild(tdName);
+
+        var tdLanguage = document.createElement("td");
+        tdLanguage.textContent = participant.language;
+        row.appendChild(tdLanguage);
+
+        var tdFormat = document.createElement("td");
+        tdFormat.textContent = participant.format;
+        row.appendChild(tdFormat);
+
+        var tdRole = document.createElement("td");
+        tdRole.textContent = participant.role;
+        row.appendChild(tdRole);
+
+        var tdExperience = document.createElement("td");
+        tdExperience.textContent = participant.experience;
+        row.appendChild(tdExperience);
+
+        var tdNext = document.createElement("td");
+        tdNext.textContent = participant.nextTournament;
+        row.appendChild(tdNext);
+
+        var tdCouldnt = document.createElement("td");
+        tdCouldnt.textContent = participant.couldnt;
+        row.appendChild(tdCouldnt);
+
         tableBody.appendChild(row);
-    }
+    });
 }
+
 var shortTableBody = document.getElementById("participants-table-body-small");
 if (shortTableBody) {
-    //fill the table with the participants
-    for (var i = 0; i < participants.length; i++) {
-        var participant = participants[i];
+    participants.forEach(function(participant, i) {
         var row = document.createElement("tr");
         row.id = "participant-" + i;
-        var lanClass = participant.language.replace("/", "-").toLowerCase();
-        var formatClass = participant.format.replace("/", "-").toLowerCase();
-        var roleClass = participant.role.replace("/", "-").toLowerCase();
-        var expClass = participant.experience == "<5" ? "exp-leq-5" : participant.experience == "5-10" ? "exp-5-10" : "exp-geq-10";
-        var nextClass = participant.nextTournament == "" ? "no-tournament" : "some-tournament";
-        var couldClass = participant.couldnt == "-" ? "couldTalk" : "notTalk";
-        row.innerHTML = `
-            <td>${participant.name}</td>
-            <td class="${lanClass}"></td>
-            <td class="${formatClass}"></td>
-            <td class="${roleClass}"></td>
-            <td class="${expClass}"></td>
-            <td class="${nextClass}"></td>
-            <td class="${couldClass}"></td>
-        `;
+
+        var tdName = document.createElement("td");
+        tdName.textContent = participant.name;
+        row.appendChild(tdName);
+
+        var tdLanguage = document.createElement("td");
+        tdLanguage.className = participant.language.replace("/", "-").toLowerCase();
+        row.appendChild(tdLanguage);
+
+        var tdFormat = document.createElement("td");
+        tdFormat.className = participant.format.replace("/", "-").toLowerCase();
+        row.appendChild(tdFormat);
+
+        var tdRole = document.createElement("td");
+        tdRole.className = participant.role.replace("/", "-").toLowerCase();
+        row.appendChild(tdRole);
+
+        var tdExperience = document.createElement("td");
+        tdExperience.className = participant.experience === "<5" ? "exp-leq-5" :
+                              participant.experience === "5-10" ? "exp-5-10" : "exp-geq-10";
+        row.appendChild(tdExperience);
+
+        var tdNext = document.createElement("td");
+        tdNext.className = participant.nextTournament === "" ? "no-tournament" : "some-tournament";
+        row.appendChild(tdNext);
+
+        var tdCouldnt = document.createElement("td");
+        tdCouldnt.className = participant.couldnt === "-" ? "couldTalk" : "notTalk";
+        row.appendChild(tdCouldnt);
+
         shortTableBody.appendChild(row);
-    }
+    });
 }
+
 
 var detailed = true;
 function changeView() {
